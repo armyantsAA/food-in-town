@@ -1,8 +1,10 @@
 import { useRouter } from "next/router";
-import restaurants from "../../utils/data.json";
+import restaurants from "../../utils/data";
+import { useGetDoc } from "../../hooks/useGetDoc"
 
 function Restaurant({ restaurant }) {
   const router = useRouter();
+  const { document } = useGetDoc("restaurants", restaurant)
   return (
     <>
       <div className="detail-nav">

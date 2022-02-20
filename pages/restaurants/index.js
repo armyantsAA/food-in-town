@@ -2,14 +2,13 @@ import React from "react";
 import Link from "next/link";
 import Nav from "../../components/Nav";
 import Restaurant from "../../components/Restaurant";
-import restaurants from "../../utils/data.json";
+// import restaurants from "../../utils/data";
 
 function Restaurants({ filteredrestaurants, cuisine }) {
   return (
     <>
       <Nav title="Food in Town" />
       <h1 style={{ marginTop: 60 }}>{cuisine}</h1>
-
       {filteredrestaurants ? (
         filteredrestaurants.map((restaurant, index) => (
           <Link href={`/restaurants/${restaurant.slug}`} key={index}>

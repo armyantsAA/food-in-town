@@ -5,10 +5,14 @@ import Btn from "../components/Btn";
 import Cuisine from "../components/Cuisine";
 import Nav from "../components/Nav";
 import Restaurant from "../components/Restaurant";
-import restaurants from "../utils/data.json";
+// import restaurants from "../utils/data";
+
+// custom hook
+import { useCollection } from "../hooks/useCollection";
 
 export default function Home() {
   const router = useRouter();
+  const { documents, isPending, error } = useCollection("restaurants")
 
   return (
     <>
@@ -30,13 +34,15 @@ export default function Home() {
       <hr />
       <h2>Your Restaurants</h2>
       <div className="restaurants">
-        {restaurants.map((restaurant, index) => (
-          <Link href={`/restaurants/${restaurant.slug}`} key={index}>
+        {error && console.log(error)}
+        {isPending && <p>Loading</p>}
+        {documents && documents.map((restaurant) => (
+          <Link href={`/restaurants/${restaurant.slug}`} key={restaurant.id}>
             <a>
               <Restaurant
                 isSmall={true}
                 name={restaurant.name}
-                image={restaurant.image}
+                image={restaurant.photoURL}
                 cuisine={restaurant.cuisine}
                 avgPrice={restaurant.avgPrice}
                 address={restaurant.address}
@@ -44,6 +50,7 @@ export default function Home() {
             </a>
           </Link>
         ))}
+
       </div>
       <h2>Cuisines</h2>
       <div className="cuisines">
