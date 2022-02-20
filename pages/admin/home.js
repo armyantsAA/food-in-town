@@ -5,7 +5,7 @@ function home() {
 export default home;
 
 export async function getServerSideProps(context) {
-  if (context.query.authenticated) {
+  if (context.params.authenticated) {
     return { props: {} };
   } else {
     return {
