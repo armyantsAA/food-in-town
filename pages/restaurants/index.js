@@ -2,29 +2,37 @@ import React from "react";
 import Link from "next/link";
 import Nav from "../../components/Nav";
 import Restaurant from "../../components/Restaurant";
+import { useRouter } from "next/router";
+import { useCollection } from '../../hooks/useCollection'
 // import restaurants from "../../utils/data";
 
-function Restaurants({ filteredrestaurants, cuisine }) {
+function Restaurants() {
+  const router = useRouter();
+  const { documents, isPending, error } = useCollection("restaurants")
+
   return (
     <>
-      <Nav title="Food in Town" />
-      <h1 style={{ marginTop: 60 }}>{cuisine}</h1>
-      {filteredrestaurants ? (
-        filteredrestaurants.map((restaurant, index) => (
-          <Link href={`/restaurants/${restaurant.slug}`} key={index}>
-            <a>
-              <Restaurant
-                name={restaurant.name}
-                image={restaurant.image}
-                cuisine={restaurant.cuisine}
-                avgPrice={restaurant.avgPrice}
-                address={restaurant.address}
-              />
-            </a>
-          </Link>
-        ))
-      ) : (
-        <h2>No Restaurants found</h2>
+      {error && console.log(error)}
+      {isPending && <p>Loading data...</p>}
+      {documents && (
+        <>
+          <Nav title="Food in Town" />
+          <h1 style={{ marginTop: 60 }}>All Restaurants</h1>
+          {documents.length !== 0 && documents.map((restaurant, index) => (
+            <Link href={`/restaurants/${restaurant.id}`} key={index}>
+              <a>
+                <Restaurant
+                  name={restaurant.name}
+                  image={restaurant.photoURL}
+                  cuisine={restaurant.cuisine}
+                  avgPrice={restaurant.avgPrice}
+                  address={restaurant.address}
+                />
+              </a>
+            </Link>
+          ))}
+          {documents.length === 0 && <h2>No restaurant found</h2>}
+        </>
       )}
     </>
   );
@@ -32,20 +40,20 @@ function Restaurants({ filteredrestaurants, cuisine }) {
 
 export default Restaurants;
 
-export async function getServerSideProps(context) {
-  const cuisine = context.query.cuisine;
-  let filteredRestaurants = restaurants.filter(
-    (restaurant) => restaurant.cuisine == cuisine
-  );
-  if (filteredRestaurants.length == 0) {
-    if (cuisine == "All Restaurants") {
-      filteredRestaurants = restaurants;
-    }
-  }
-  return {
-    props: {
-      filteredrestaurants: filteredRestaurants,
-      cuisine,
-    },
-  };
-}
+// export async function getServerSideProps(context) {
+//   const cuisine = context.query.cuisine;
+//   let filteredRestaurants = restaurants.filter(
+//     (restaurant) => restaurant.cuisine == cuisine
+//   );
+//   if (filteredRestaurants.length == 0) {
+//     if (cuisine == "All Restaurants") {
+//       filteredRestaurants = restaurants;
+//     }
+//   }
+//   return {
+//     props: {
+//       filteredrestaurants: filteredRestaurants,
+//       cuisine,
+//     },
+//   };
+// }

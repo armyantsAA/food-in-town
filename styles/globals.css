@@ -127,6 +127,8 @@ body {
 .restaurant-img img {
   width: 100%;
   height: 100px;
+  object-fit: cover;
+  object-position: 50% 50%;
   background-color: #ddd;
 }
 
@@ -190,6 +192,8 @@ body {
 .detail-img img {
   width: 100%;
   height: 200px;
+  object-fit: cover;
+  object-position: 50% 50%;
   background-color: #ddd;
 }
 
@@ -219,7 +223,7 @@ body {
   position: absolute;
   top: 5px;
   left: 5px;
-  color: white;
+  color: black;
   font-size: 18px;
 }
 

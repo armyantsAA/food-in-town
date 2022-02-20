@@ -26,7 +26,7 @@ export default function Home() {
           onClick={() =>
             router.push({
               pathname: "/restaurants",
-              query: { cuisine: "All Restaurants" },
+              // query: { cuisine: "All Restaurants" },
             })
           }
         />
@@ -37,7 +37,7 @@ export default function Home() {
         {error && console.log(error)}
         {isPending && <p>Loading</p>}
         {documents && documents.map((restaurant) => (
-          <Link href={`/restaurants/${restaurant.slug}`} key={restaurant.id}>
+          <Link href={`/restaurants/${restaurant.id}`} key={restaurant.id}>
             <a>
               <Restaurant
                 isSmall={true}
@@ -71,7 +71,7 @@ export default function Home() {
           image="https://images.unsplash.com/photo-1617196035154-1e7e6e28b0db?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8amFwYW5lc2UlMjBmb29kfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=600&q=60"
         />
         <Cuisine
-          name="Drink"
+          name="Drinks"
           image="https://images.unsplash.com/photo-1622483767028-3f66f32aef97?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTN8fGNvY2ElMjBjb2xhfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=600&q=60"
         />
         <Cuisine

@@ -9,16 +9,23 @@ export const useGetDoc = (col, docu) => {
 
   useEffect(() => {
     setIsPending(true)
-    const docRef = doc(db, col, docu);
-    
-    getDoc(docRef).then(docSnap => {
-      setDocument(docSnap.data())
-      setError(null)
-      setIsPending(false)
-    })
-
+    if (docu) {
+      const docRef = doc(db, col, docu);
+      getDoc(docRef).then(docSnap => {
+        if (docSnap.exists()) {
+          setDocument(docSnap.data())
+          setError(null)
+          setIsPending(false)
+        } else {
+          console.log("not found")
+          setIsPending(false)
+        }
+      }).catch(err => {
+        console.log("error", err)
+      })
+    }
     // unsub on unmount
-    return () => unsub()
+    // return () => unsub()
   }, [col, docu])
 
   return { document, error, isPending }
