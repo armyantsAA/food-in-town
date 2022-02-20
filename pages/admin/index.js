@@ -1,7 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-hooks/rules-of-hooks */
-import React, { useState } from "react";
+import { useRouter } from "next/router";
+import React, { useState, useEffect } from "react";
 
 function index() {
+  const router = useRouter();
   const [password, setPassword] = useState("");
   const [authenticated, setAuthenticated] = useState(false);
 
@@ -13,6 +16,12 @@ function index() {
       console.log("Wrong password");
     }
   };
+
+  useEffect(() => {
+    if (authenticated) {
+      router.push("/admin/home", { authenticated });
+    }
+  }, [authenticated]);
   return (
     <>
       <h1>Admin Page</h1>
