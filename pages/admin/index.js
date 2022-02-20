@@ -19,7 +19,7 @@ function index() {
 
   useEffect(() => {
     if (authenticated) {
-      router.push("/admin/home", { authenticated });
+      router.push("/admin/home?authenticated=true");
     }
   }, [authenticated]);
   return (

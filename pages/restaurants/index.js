@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import Nav from "../../components/Nav";
 import Restaurant from "../../components/Restaurant";
-// import restaurants from "../../utils/data";
+import restaurants from "../../utils/data";
 
 function Restaurants({ filteredrestaurants, cuisine }) {
   return (

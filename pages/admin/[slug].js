@@ -1,10 +1,16 @@
+import react, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import FloatingBtn from "../../components/admin/FloatingBtn";
 import restaurants from "../../utils/data";
-import { useGetDoc } from "../../hooks/useGetDoc";
 
-function Restaurant({ restaurant, slug }) {
+function Restaurant({ restaurant }) {
   const router = useRouter();
-  const { document } = useGetDoc("restaurants", slug);
+  const [slug, setSlug] = useState(router.query.slug);
+
+  const handleClick = () => {
+    // add Item
+  };
+
   return (
     <>
       <div className="detail-nav">
@@ -38,6 +44,7 @@ function Restaurant({ restaurant, slug }) {
           </div>
         ))}
       </div>
+      <FloatingBtn onClick={handleClick} />
     </>
   );
 }
@@ -50,7 +57,6 @@ export async function getServerSideProps({ params }) {
   return {
     props: {
       restaurant,
-      slug,
     },
   };
 }
