@@ -6,9 +6,15 @@ import restaurants from "../../utils/data";
 function Restaurant({ restaurant }) {
   const router = useRouter();
   const [slug, setSlug] = useState(router.query.slug);
+  const [isOpened, setIsOpened] = useState(false);
 
   const handleClick = () => {
     // add Item
+    setIsOpened(true);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
   };
 
   return (
@@ -43,6 +49,18 @@ function Restaurant({ restaurant }) {
             <p className="item-price">{item.price || "MMK --"}</p>
           </div>
         ))}
+      </div>
+      <div className="add-form add-item-form">
+        <h1>Add Item Form</h1>
+        <form onSubmit={handleSubmit}>
+          <label htmlFor="item-name">Item Name</label>
+          <input id="item-name" name="item-name" type="text" required />
+          <label htmlFor="item-price">Item Price</label>
+          <input id="item-price" name="item-price" type="text" required />
+          <label htmlFor="item-image">Item Image</label>
+          <input id="item-image" name="item-image" type="file" disabled />
+          <button type="submit">Add Item</button>
+        </form>
       </div>
       <FloatingBtn onClick={handleClick} />
     </>
