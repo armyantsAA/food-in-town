@@ -69,7 +69,7 @@ const home = () => {
             <label htmlFor="item-image">Item Image</label>
             <input id="item-image" name="item-image" type="file" disabled />
           </div> */}
-            <button type="submit">Add Restaurant</button>
+            <button type="submit">Add</button>
           </form>
         </div>
       )}
