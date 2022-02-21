@@ -320,3 +320,13 @@ body {
 /* .add-item-form {
 
 } */
+
+/* back-form */
+.back-form {
+  cursor: pointer;
+  position: fixed;
+  left: 10px;
+  top: 10px;
+  width: 40px;
+  overflow: hidden;
+}

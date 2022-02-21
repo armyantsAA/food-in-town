@@ -52,6 +52,12 @@ function Restaurant({ restaurant }) {
       </div>
       <div className="add-form add-item-form">
         <h1>Add Item Form</h1>
+        <div
+          className="back-form"
+          onClick={() => {
+            setIsOpened(false);
+          }}
+        ></div>
         <form onSubmit={handleSubmit}>
           <label htmlFor="item-name">Item Name</label>
           <input id="item-name" name="item-name" type="text" required />

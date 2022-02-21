@@ -5,7 +5,7 @@ import Nav from "../../components/Nav";
 import Restaurant from "../../components/Restaurant";
 import restaurants from "../../utils/data.json";
 
-function home() {
+const home = () => {
   const [isOpened, setIsOpened] = useState(false);
   const handleClick = () => {
     setIsOpened(true);
@@ -40,6 +40,14 @@ function home() {
       {isOpened && (
         <div className="add-form">
           <h1>Add Restaurant Form</h1>
+          <div
+            className="back-form"
+            onClick={() => {
+              setIsOpened(false);
+            }}
+          >
+            <span className="material-icons">arrow_backward</span>
+          </div>
           <form onSubmit={handleSubmit}>
             <label htmlFor="name">Name</label>
             <input id="name" name="name" type="text" />
@@ -68,6 +76,6 @@ function home() {
       <FloatingBtn onClick={handleClick} />
     </div>
   );
-}
+};
 
 export default home;
